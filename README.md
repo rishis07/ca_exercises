@@ -50,10 +50,3 @@ Al finalizar<br>
 Escribir código que permita probar las funciones creadas, utilizando los datos de prueba
 provistos. Luego configurar un script que permita ejecutar nuestro código de prueba mediante la instrucción: `npm test`.
 
-
-## Build docker image
-`docker build -t ca_files .`
-
-## Run the server
-`docker run --rm -v $(pwd):/opt/app ca_files npm run`
-
