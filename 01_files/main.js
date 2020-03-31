@@ -36,7 +36,7 @@ let out_file = './out/write_file.out'
 // let arr1 = [1, 5, 10]
 // let arr2 = [2, 3, 8, 11]
 
-// let res = apareo_utils.combinarDosArrays(arr1, arr2)
+// let res = apareo_utils.combinarDosArrays(arr1, arr2, true)
 // console.log(res)
 
 // Output: [1, 2, 3, 5, 8, 10, 11]

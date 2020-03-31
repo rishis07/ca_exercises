@@ -5,11 +5,11 @@
  * @returns {number[]} un nuevo array de números ordenados
  */
 
-exports.combinarDosArrays = function (arrA, arrB) {
-    return mergeArrays(arrA, arrB)
+exports.combinarDosArrays = function (arrA, arrB, sorted) {
+    return mergeArrays(arrA, arrB, sorted)
 }
 
-function mergeArrays(arrA, arrB) {
+function mergeArrays(arrA, arrB, sorted) {
 
     res = [];
     leftOver = [];
@@ -30,8 +30,15 @@ function mergeArrays(arrA, arrB) {
         res.push(bigger[i]);
     }
     res = [].concat(res, leftOver) //this concat is a little wierd
+    // Note: In the first problem there is the cuestion of
+    // not using sort and find another way. This can be achived
+    // by putting an if on the push secction but it will only work
+    // with intercalated arrays. For example [1,10], [2,5,7]
+    // will break. I'm choosing this method so I can reuse this
+    // for N arrays applying some good old recursion
+    if (sorted) { return res.sort((a, b) => a - b); }
+    return res
 
-    return res.sort((a, b) => a - b);
 
 }
 
@@ -45,10 +52,10 @@ exports.combinarNArrays = function (arrs) {
     res = arrs.shift()
 
     arrs.forEach(singleArr => {
-        res = mergeArrays(res, singleArr)
+        res = mergeArrays(res, singleArr, false)
     });
 
-    return res
+    return res.sort((a, b) => a - b);
 }
 
 // exportar ambas funciones
