@@ -15,9 +15,10 @@ const file_utils = require('./src/fileUtils.js');
 
 // actualizarArchivosDeudas
 
-rutaDeudasOld = 'out/deudas_old.txt'
-rutaPagos = 'out/pagos.txt'
-rutaDeudasNew = 'out/deudas_new.txt'
-rutaLog = 'out/log.txt'
+rutaDeudasOld = 'in/deudasOLD.json'
+rutaPagos = 'in/pagos.json'
+rutaDeudasNew = 'out/deudas_new.json'
+rutaLog = 'out/out.log'
 
-actualizarArchivosDeudas(rutaDeudasOld, rutaPagos, rutaDeudasNew, rutaLog)
+
+apareo_utils.actualizarArchivosDeudas(rutaDeudasOld, rutaPagos, rutaDeudasNew, rutaLog)

@@ -16,6 +16,11 @@ exports.jsonToList = function (file_path) {
     return obj
 };
 
+exports.arrayToJson = function (arr_list) {
+    let out = JSON.stringify(arr_list);
+    return out
+};
+
 /**
  * escribe el texto en el archivo de la ruta, sólo si tal archivo existe.
  * sino, lanza error.
@@ -27,6 +32,20 @@ exports.escribirTextoEnArchivo = function (file_path, text, createIfNotExists) {
     if (fs.existsSync(file_path) || createIfNotExists == true) {
         fs.writeFileSync(file_path, text);
         console.log('file written');
+    } else {
+        console.log("File does not exist")
+    }
+}
+
+/**
+ * Agrega el texto al archivo de la ruta provista.
+ * @param {string} file_path relativa al directorio del proyecto
+ * @param {string} text 
+ * @param {string} createIfNotExists flag para crear el archivo si no existe 
+ */
+exports.appendTextoEnArchivo = function (file_path, text, createIfNotExists) {
+    if (fs.existsSync(file_path) || createIfNotExists == true) {
+        fs.appendFileSync(file_path, text);
     } else {
         console.log("File does not exist")
     }

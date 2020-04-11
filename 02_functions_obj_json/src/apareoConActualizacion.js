@@ -1,6 +1,6 @@
 // importar lo que sea necesario
 const util = require('util');
-const file_utils = require('./src/fileUtils.js');
+const file_utils = require('./fileUtils.js');
 
 /**
  * Detecta cual de los objetos A, B es mayor, si una colección de claves es pasada itera
@@ -10,6 +10,7 @@ const file_utils = require('./src/fileUtils.js');
  * @param {string[]} claves las claves por las que quiero ordenar, por orden de importancia
  * TODO: Deberia hacer alguna lógica para que detecte el tipo de dato, probablemente no funcione
  * con dates
+ * @return {boolean} true si a es mayor, false si b es mayor
  */
 function mayor_menor(a, b, claves) {
     clave = claves.pop()
@@ -45,13 +46,26 @@ function ordenar(coleccion, claves) {
  * @param {string} rutaDeudasNew
  * @param {string} rutaLog
  */
-function actualizarArchivosDeudas(rutaDeudasOld, rutaPagos, rutaDeudasNew, rutaLog) {
+exports.actualizarArchivosDeudas = function (rutaDeudasOld, rutaPagos, rutaDeudasNew, rutaLog) {
     let deudas = file_utils.jsonToList(rutaDeudasOld);
     let pagos = file_utils.jsonToList(rutaPagos);
 
     new_deudas = innerActualizarDeudas(deudas, pagos, logger)
+    console.log(file_utils.arrayToJson(new_deudas))
 
-    file_utils.escribirTextoEnArchivo(rutaDeudasNew, new_deudas, True)
+    file_utils.escribirTextoEnArchivo(rutaDeudasNew, file_utils.arrayToJson(new_deudas), true)
+}
+
+/**
+ * @callback loggerCallback
+ * @param {string} msg message to display
+ * @param {string} filePath write log to file. Null to skip
+ */
+function logger(msg, filePath = null) {
+    console.log(msg)
+    if (filePath) {
+        file_utils.appendTextoEnArchivo(filePath, msg, True)
+    }
 }
 
 /**
@@ -60,11 +74,9 @@ function actualizarArchivosDeudas(rutaDeudasOld, rutaPagos, rutaDeudasNew, rutaL
  * @param {string} filePath write log to file. Null to skip
  */
 exports.logguear = function (msg, filePath = null) {
-    console.log(msg)
-    if (filePath) {
-        file_utils.escribirTextoEnArchivo(filePath, msg, True) // This should be changed to an append
-    }
+    logger(msg, filePath)
 }
+
 
 /**
  * Inner actualizar deudas, no se como se hará esto para que el mismo export haga todo
@@ -109,7 +121,7 @@ function innerActualizarDeudas(deudas, pagos, logger) {
             "apellido": deuda["apellido"],
             "debe": parseFloat(deuda["debe"]) - sum_pagos
         }
-        new_deudas.push();
+        new_deudas.push(obj_new_deuda);
         logger(`new record stored ${obj_new_deuda["dni"]}`);
         console.log(obj_new_deuda["debe"]);
         if (obj_new_deuda["debe"] < 0) {
@@ -185,6 +197,12 @@ se mantiene el registro original sin cambios
 }
 
 // no modificar la interfaz pública!
+// Todo: No pude hacer andar esto, no pude encontrar cual es la solución
+//Error:
+// export default {
+//     ^^^^^^
+//     SyntaxError: Unexpected token export
+
 // export default {
 //     actualizarArchivosDeudas
 // }
