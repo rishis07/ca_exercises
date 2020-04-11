@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "name": "03_files",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
