@@ -39,33 +39,25 @@ exports.backupSync = function (data_path, backup_path) {
 
 /**
  * Hace una copia sincronica de respado del path pasado y lo guarda en el mismo directorio
+ * utilizando promises
  * @param {string} data_path path relativo de los archivos a respaldar
  * @param {string} backup_path path relativo a donde respaldar los datos
  * Todo: It' would be funnier to reuse this function in order to copy other
  * folders inside the data path
  */
-exports.backupAsync = function (data_path, backup_path) {
+exports.backupPromise = function (data_path, backup_path) {
     let origin_path = ""
     let dest_path = ""
 
-    fs.readdir(data_path, function (err, items) {
-        items.forEach(obj => {
-            origin_path = `${data_path}/${obj}`
-            fs.stat(origin_path, (err, stat) => {
-                if (stat.isFile() && obj[0] != ".") {
-                    console.log(`${obj} is ${stat.isFile()}`)
-                    origin_path = `${data_path}/${obj}`
-                    dest_path = `${backup_path}/${obj}`
-                    fs.copyFile(origin_path, dest_path, (err) => {
-                        if (err) throw err;
-                        console.log(`${obj} Done`);
-                    });
-                }
-            })
-        });
-    });
-
-
+    async function fun() {
+        try {
+            let files = await fs.readdirSync(data_path);
+            console.log(files)
+        } catch (err) {
+            console.log("Something whent wrong")
+            console.log(err)
+        }
+    }
 }
 
 /**

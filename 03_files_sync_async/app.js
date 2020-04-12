@@ -10,12 +10,14 @@ backup_path = './data/backup'
 
 // 2. Realizar el mismo programa, pero que funcione en forma asincrónica, utilizando
 //callbacks
-file_utils.backupAsync(data_path, backup_path)
-console.log("Done")
+// file_utils.backupAsync(data_path, backup_path)
+
 
 
 // 3. Realizar el mismo programa, pero utilizando Promises, con la sintaxis then/catch, y
 //luego usando async/await.
+file_utils.backupPromise(data_path, backup_path)
+console.log("Done")
 
 
 // 4. Para pensar y comentar:<br></br>
