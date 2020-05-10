@@ -1,23 +1,24 @@
-const file_utils = require('./src/fileUtils.js');
+import { backupSync, backupAsync, backupPromise, backupAsyncAwait } from './src/fileUtils.js';
 
-data_path = './data'
-backup_path = './data/backup'
+let data_path = './data';
+let backup_path = './data/backup';
 
 // 1. Desarrollar un programa que realice lo pedido, procesando los archivos en forma
 // sincrónica.
-// file_utils.backupSync(data_path, backup_path)
+// backupSync(data_path, backup_path)
 
 
 // 2. Realizar el mismo programa, pero que funcione en forma asincrónica, utilizando
 //callbacks
-// file_utils.backupAsync(data_path, backup_path)
+//backupAsync(data_path, backup_path)
 
 
 
 // 3. Realizar el mismo programa, pero utilizando Promises, con la sintaxis then/catch, y
-//luego usando async/await.
-file_utils.backupPromise(data_path, backup_path)
-console.log("Done")
+// backupPromise(data_path, backup_path)
 
+//luego usando async/await.
+//backupAsyncAwait(data_path, backup_path)
 
 // 4. Para pensar y comentar:<br></br>
+// NodeJs es horrible aguante python
